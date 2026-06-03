@@ -1,0 +1,175 @@
+@import "tailwindcss";
+
+/* ---------- Design tokens ---------- */
+@theme {
+  --color-bg: #0a0b0e;
+  --color-bg-elevated: #101216;
+  --color-surface: #14161b;
+  --color-surface-2: #1a1d24;
+  --color-border: #23262e;
+  --color-border-strong: #313542;
+  --color-text: #e7e9ee;
+  --color-muted: #969ba6;
+  --color-faint: #646a76;
+  --color-accent: #7c6cff;
+  --color-accent-hover: #8c7dff;
+  --color-accent-soft: #1d1b3a;
+  --color-green: #34c98a;
+  --color-amber: #f2b441;
+  --color-red: #f06a6a;
+
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  --radius: 0.75rem;
+}
+
+/* ---------- Base ---------- */
+html,
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: color-mix(in oklab, var(--color-accent) 40%, transparent);
+}
+
+/* Light theme overrides (applied via <html data-theme="light">) */
+[data-theme="light"] {
+  --color-bg: #f6f7f9;
+  --color-bg-elevated: #ffffff;
+  --color-surface: #ffffff;
+  --color-surface-2: #f0f1f4;
+  --color-border: #e5e7eb;
+  --color-border-strong: #d1d5db;
+  --color-text: #1b1d22;
+  --color-muted: #5b616c;
+  --color-faint: #99a0ab;
+  --color-accent: #6b5cf0;
+  --color-accent-hover: #5a48ec;
+  --color-accent-soft: #eceaff;
+  --color-green: #1f9d6b;
+  --color-amber: #c0820a;
+  --color-red: #d64545;
+}
+[data-theme="light"] .page-glow::before {
+  opacity: 0.5;
+}
+
+/* Subtle, refined scrollbars */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border-strong) transparent;
+}
+*::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+*::-webkit-scrollbar-thumb {
+  background: var(--color-border-strong);
+  border-radius: 9999px;
+  border: 2px solid var(--color-bg);
+}
+
+/* Ambient glow at the top of the page */
+.page-glow::before {
+  content: "";
+  position: fixed;
+  inset: -20% 0 auto 0;
+  height: 420px;
+  background: radial-gradient(
+    60% 100% at 50% 0%,
+    color-mix(in oklab, var(--color-accent) 22%, transparent) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ---------- Component utilities ---------- */
+@layer components {
+  .panel {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+  }
+
+  .input {
+    width: 100%;
+    background: var(--color-bg-elevated);
+    border: 1px solid var(--color-border);
+    border-radius: 0.6rem;
+    padding: 0.55rem 0.75rem;
+    font-size: 0.875rem;
+    color: var(--color-text);
+    outline: none;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  .input::placeholder {
+    color: var(--color-faint);
+  }
+  .input:focus {
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px color-mix(in oklab, var(--color-accent) 25%, transparent);
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    border-radius: 0.6rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    padding: 0.55rem 0.9rem;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s, opacity 0.15s, transform 0.05s;
+    white-space: nowrap;
+    user-select: none;
+  }
+  .btn:active {
+    transform: translateY(1px);
+  }
+  .btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+  .btn-primary {
+    background: var(--color-accent);
+    color: white;
+  }
+  .btn-primary:hover:not(:disabled) {
+    background: var(--color-accent-hover);
+  }
+  .btn-ghost {
+    background: transparent;
+    border: 1px solid var(--color-border);
+    color: var(--color-text);
+  }
+  .btn-ghost:hover:not(:disabled) {
+    background: var(--color-surface-2);
+    border-color: var(--color-border-strong);
+  }
+  .btn-danger:hover:not(:disabled) {
+    background: color-mix(in oklab, var(--color-red) 16%, transparent);
+    color: var(--color-red);
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.7rem;
+    font-weight: 500;
+    padding: 0.15rem 0.5rem;
+    border-radius: 9999px;
+    border: 1px solid var(--color-border);
+    color: var(--color-muted);
+  }
+}
