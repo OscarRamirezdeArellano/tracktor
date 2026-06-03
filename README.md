@@ -39,8 +39,6 @@ tracking pleasant:
 
 ## 📸 Screenshots
 
-> _Add your own screenshots to a `docs/` folder and uncomment the lines below._
-
 
 <p align="center">
   <img src="docs/dashboard.png"  width="49%" alt="Dashboard with stopwatch and stats" />
